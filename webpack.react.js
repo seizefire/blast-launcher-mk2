@@ -33,8 +33,17 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.(png|svg|jpg|jpeg|gif)$/i,
+				test: /\.(jpe?g|png|gif|svg|ico)$/i,
 				type: 'asset/resource'
+			},
+			{
+				test: /\.(html)$/,
+				use: {
+					loader: 'html-loader',
+					options: {
+						sources: true
+					}
+				}
 			}
 		]
 	},

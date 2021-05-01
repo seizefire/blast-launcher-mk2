@@ -1,0 +1,71 @@
+div#windows-10-titlebar {
+	display: none;
+	height: 32px;
+	position: absolute;
+	width: 100vw;
+
+	>div.drag-region {
+		height: 27px;
+		margin-left: 5px;
+		margin-top: 5px;
+		position: absolute;
+		width: calc(100vw - 143px);
+		-webkit-app-region: drag;
+	}
+	>div.buttons {
+		display: grid;
+		grid-template-columns: repeat(3, 46px);
+		height: 32px;
+		position: absolute;
+		right: 0;
+		top: 0;
+
+		>div {
+			align-items: center;
+			display: flex;
+			grid-column: 2;
+			grid-row: 1 / span 1;
+			height: 100%;
+			justify-content: center;
+			user-select: none;
+			width: 100%;
+
+			>img {
+				display: none;
+				@media (-webkit-device-pixel-ratio: 1.5), (device-pixel-ratio: 1.5), (-webkit-device-pixel-ratio: 2), (device-pixel-ratio: 2), (-webkit-device-pixel-ratio: 3), (device-pixel-ratio: 3) {
+					width: 10px;
+					height: 10px;
+				}
+			}
+			&.minimize-button {grid-column: 1 !important;}
+			&.unmaximize-button {display: none;}
+			&.close-button {
+				grid-column: 3 !important;
+				&:hover {background: #E81123 !important;}
+				&:active {background: #F1707A !important;}
+			}
+
+			&:not(:hover):not(:active) {transition: background 0.2s ease-out;}
+		}
+	}
+}
+body.maximized div#windows-10-titlebar>div.buttons {
+	>div.unmaximize-button {display: flex !important;}
+	>div.maximize-button {display: none !important;}
+}
+body.dark div#windows-10-titlebar>div.buttons>div {
+	&:not(.close-button) {
+		&:active {background: rgba(255, 255, 255, 0.2);}
+		&:hover {background: rgba(255, 255, 255, 0.1);}
+	}
+	>img:first-child {display: block !important;}
+}
+body.light div#windows-10-titlebar>div.buttons>div {
+	&:not(.close-button) {
+		&:active {background: rgba(0, 0, 0, 0.2);}
+		&:hover {background: rgba(0, 0, 0, 0.1);}
+	}
+	&.close-button:active>img {filter: invert(1);}
+	&.close-button:hover>img {filter: invert(1);}
+	>img:last-child {display: block !important;}
+}
